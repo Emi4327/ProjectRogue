@@ -8,6 +8,7 @@ public class MoveState : State
     public MoveState(StateMachine machine)
     {
         transition = new Transition(machine);
-        AddTransitionCondition(StatesEnum.IdleState, new IsKeyPressedCondition(KeyCode.S));
+        AddTransitionCondition(StatesEnum.IdleState, new IsKeyPressedCondition(KeyCode.T));
+        AddBehaviour(new PlayerMovementBehaviour(machine));
     }
 }

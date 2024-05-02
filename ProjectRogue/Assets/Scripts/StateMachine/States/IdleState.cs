@@ -4,12 +4,10 @@ using UnityEngine;
 using StateMachineNamespace;
 public class IdleState : State
 {
-
     public IdleState(StateMachine stateMachine)
     {
         transition = new Transition(stateMachine);
-        AddTransitionCondition(StatesEnum.MoveState, new IsKeyPressedCondition(KeyCode.W));
-
+        AddTransitionCondition(StatesEnum.MoveState, new IsKeyPressedCondition(KeyCode.T));
     }
 }
 

@@ -8,28 +8,34 @@ namespace StateMachineNamespace
         private State previousState;
         private State currentState;
         protected Dictionary<StatesEnum, State > states = new Dictionary<StatesEnum, State>();
-        void Start()
+
+        private List<Component> myComponents = new List<Component>();
+        private void Start()
         {
             ChangeState(StatesEnum.IdleState);
         }
 
-        void Update()
+        private void Update()
         {
             Debug.Log(currentState);
 
-            currentState.OnUpdate();
+            currentState.ExecuteBehavioursOnUpdate();
             currentState.CheckTransition();
+        }
+        private void FixedUpdate()
+        {
+            currentState.ExecuteBehavioursOnFixedUpdate();
         }
 
         public void ChangeState(StatesEnum stateEnum)
         {
             if(currentState != null)
             {
-                currentState.OnExit();
+                currentState.ExecuteBehavioursOnExit();
             }
             previousState = currentState;
             currentState = states[stateEnum];
-            currentState.OnEnter();
+            currentState.ExecuteBehavioursOnEnter();
         }
     }
 }
