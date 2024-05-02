@@ -1,14 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class IdleState : IState
+using StateMachineNamespace;
+public class IdleState : State
 {
-    public void OnEnter()
+
+    public IdleState(StateMachine stateMachine)
     {
+        transition = new Transition(stateMachine);
+        AddTransitionCondition(StatesEnum.MoveState, new IsKeyPressedCondition(KeyCode.W));
 
     }
-    public void OnUpdate() { }
-
-    public void OnExit() { }
 }
+
+

@@ -1,22 +1,36 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class StateMachine : MonoBehaviour
+namespace StateMachineNamespace
 {
-    [SerializeField] private List<IState> states;
-    // Start is called before the first frame update
-    void Start()
+    public class StateMachine : MonoBehaviour
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        foreach(var state in states)
+        private State previousState;
+        private State currentState;
+        protected Dictionary<StatesEnum, State > states = new Dictionary<StatesEnum, State>();
+        void Start()
         {
-            state.OnUpdate();
+            ChangeState(StatesEnum.IdleState);
+        }
+
+        void Update()
+        {
+            Debug.Log(currentState);
+
+            currentState.OnUpdate();
+            currentState.CheckTransition();
+        }
+
+        public void ChangeState(StatesEnum stateEnum)
+        {
+            if(currentState != null)
+            {
+                currentState.OnExit();
+            }
+            previousState = currentState;
+            currentState = states[stateEnum];
+            currentState.OnEnter();
         }
     }
 }
+
