@@ -36,7 +36,7 @@ namespace StateMachineNamespace
                 int counter = 0;
                 foreach(var condition in transitionConditions[state])
                 {
-                    if(condition.Condition())
+                    if(condition.Condition(machine))
                     {
                         counter++;
                     }

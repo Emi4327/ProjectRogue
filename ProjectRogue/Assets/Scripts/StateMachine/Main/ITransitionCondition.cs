@@ -5,7 +5,8 @@ namespace StateMachineNamespace
 {
     public interface ITransitionCondition
     {
-        public bool Condition() { return false; }
+        public void Initialize(StateMachine machine) { }
+        public bool Condition(StateMachine machine) { return false; }
     }
 
 }

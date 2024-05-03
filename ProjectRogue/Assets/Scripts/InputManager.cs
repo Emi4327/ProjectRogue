@@ -20,4 +20,9 @@ public class InputManager : MonoBehaviour
     {
         inputActionAsset.Disable();
     }
+
+    public InputAction GetInputAction(string name)
+    {
+        return inputActionAsset.FindAction(name);
+    }
 }
