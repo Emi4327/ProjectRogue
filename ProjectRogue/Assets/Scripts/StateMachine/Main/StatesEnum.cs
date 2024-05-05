@@ -7,6 +7,8 @@ namespace StateMachineNamespace
     {
         IdleState,
         MoveState,
+        EnemyIdleState,
+        EnemyMoveToPlayerState,
     }
 
 }

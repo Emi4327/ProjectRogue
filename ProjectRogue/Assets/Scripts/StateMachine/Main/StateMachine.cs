@@ -9,7 +9,6 @@ namespace StateMachineNamespace
         private State currentState;
         protected Dictionary<StatesEnum, State > states = new Dictionary<StatesEnum, State>();
 
-        private List<Component> myComponents = new List<Component>();
         private void Start()
         {
             ChangeState(StatesEnum.IdleState);
@@ -36,6 +35,11 @@ namespace StateMachineNamespace
             previousState = currentState;
             currentState = states[stateEnum];
             currentState.ExecuteBehavioursOnEnter();
+        }
+
+        public string GetCurrentStateName()
+        {
+            return currentState.ToString();
         }
     }
 }
