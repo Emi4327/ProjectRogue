@@ -5,6 +5,7 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     [SerializeField] private float speed = 10;
+    private float damage;
     Vector3 direction;
     private void Update()
     {
@@ -19,6 +20,7 @@ public class Bullet : MonoBehaviour
     public void Initialize(WeaponSO weaponSO, InputManager inputManager)
     {
         speed = weaponSO.projectileSpeed;
+        damage = weaponSO.Damage;
         SetDirectionTowardsMouse(inputManager);
     }
     private void SetDirectionTowardsMouse(InputManager inputManager)
@@ -28,9 +30,9 @@ public class Bullet : MonoBehaviour
         direction = (mousePosition - transform.position).normalized;
     }
 
-        private void HandleCollision(RaycastHit2D hit)
+    private void HandleCollision(RaycastHit2D hit)
     {
-        Debug.Log(hit.collider);
+        hit.collider.GetComponent<EnemyStatistics>().TakeDamage(damage);
         Destroy(gameObject);
     }
 }

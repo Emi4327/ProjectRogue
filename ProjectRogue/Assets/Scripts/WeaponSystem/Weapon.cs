@@ -9,14 +9,18 @@ public class Weapon : MonoBehaviour, IWeapon
     [SerializeField] protected WeaponSO weaponSO;
     [SerializeField] private RangedWeapon rangedWeapon;
     private float timer;
-    protected bool canAttack;
+    protected bool canAttack = true;
     protected InputManager inputManager;
+    protected EnemyAIHelper enemyAIHelper;
+
     private void Start()
     {
+        enemyAIHelper = transform.GetComponentInParent<EnemyAIHelper>();
         inputManager = transform.GetComponentInParent<InputManager>();
     }
     private void Update()
     {
+        timer += Time.deltaTime;
         if(timer>= 1/weaponSO.AttackSpeed)
         {
             timer = 0;

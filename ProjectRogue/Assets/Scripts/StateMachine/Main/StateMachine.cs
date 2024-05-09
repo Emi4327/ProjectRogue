@@ -11,13 +11,10 @@ namespace StateMachineNamespace
 
         private void Start()
         {
-            ChangeState(StatesEnum.IdleState);
         }
 
         private void Update()
         {
-            Debug.Log(currentState);
-
             currentState.ExecuteBehavioursOnUpdate();
             currentState.CheckTransition();
         }

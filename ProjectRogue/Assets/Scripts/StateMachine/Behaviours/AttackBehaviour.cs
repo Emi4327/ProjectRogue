@@ -7,11 +7,12 @@ public class AttackBehaviour : StateBehaviour
 {
     private StateMachine machine;
     private InputManager inputManager;
+    private WeaponsManager weaponsManager;
     public AttackBehaviour(StateMachine machine)
     {
         this.machine = machine;
         inputManager = machine.GetComponent<InputManager>();
-        
+        weaponsManager = machine.GetComponentInChildren<WeaponsManager>();
     }
 
     public override void OnEnter()
@@ -24,6 +25,6 @@ public class AttackBehaviour : StateBehaviour
     }
     private void Attack()
     {
-        machine.GetComponentInChildren<WeaponsManager>().Attack();
+        weaponsManager.Attack();
     }
 }

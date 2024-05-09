@@ -7,10 +7,18 @@ public abstract class RangedWeapon : Weapon
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private Transform bulletSpawnPoint;
 
+
     public void Fire()
     {
         var bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, Quaternion.identity);
 
-        bullet.GetComponent<Bullet>().Initialize(weaponSO, inputManager);
+        if(bullet.GetComponent<Bullet>())
+        {
+            bullet.GetComponent<Bullet>().Initialize(weaponSO, inputManager);
+        }
+        else
+        {
+            bullet.GetComponent<EnemyBullet>().Initialize(weaponSO, enemyAIHelper.Target);
+        }
     }
 }

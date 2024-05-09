@@ -4,10 +4,9 @@ using UnityEngine;
 
 public class WeaponsManager : MonoBehaviour
 {
-    [SerializeField] private RangedWeapon weapon;
-
+    [SerializeField] private Weapon weapon;
     public void Attack()
     {
-        weapon.Fire();
+        weapon.Attack();
     }
 }

@@ -13,5 +13,6 @@ public class PlayerStateMachine : StateMachine
     {
         states.Add(StatesEnum.IdleState, new IdleState(this));
         states.Add(StatesEnum.MoveState, new MoveState(this));
+        ChangeState(StatesEnum.IdleState);
     }
 }

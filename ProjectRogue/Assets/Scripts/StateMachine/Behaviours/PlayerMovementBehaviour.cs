@@ -26,7 +26,12 @@ public class PlayerMovementBehaviour : StateBehaviour
     {
         if (canMove)
         {
-            rb2D.velocity = moveInput.normalized * stats.Speed;
+            Vector2 velocity = moveInput.normalized * stats.Speed;
+            rb2D.velocity = velocity;
+        }
+        else
+        {
+            rb2D.velocity = Vector2.zero;
         }
     }
 

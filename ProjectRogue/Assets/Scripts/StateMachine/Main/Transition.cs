@@ -43,7 +43,6 @@ namespace StateMachineNamespace
                 }
                 if(counter == amountOfAllConditions)
                 {
-                    Debug.Log("Counter: " + counter + "   transitionConditions count: " + transitionConditions[state].Count);
                     machine.ChangeState(state);
                     return;
                 }

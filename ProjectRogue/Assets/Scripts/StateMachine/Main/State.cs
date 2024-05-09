@@ -10,7 +10,10 @@ namespace StateMachineNamespace
         private List<StateBehaviour> behaviours = new List<StateBehaviour>();
         public void CheckTransition()
         {
-            transition.CheckConditions();
+            if(transition != null)
+            {
+                transition.CheckConditions();
+            }
         }
 
         protected void AddTransitionCondition(StatesEnum stateEnum, ITransitionCondition condition)
