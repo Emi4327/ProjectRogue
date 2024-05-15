@@ -11,6 +11,7 @@ public class IdleState : State
 
         AddTransitionCondition(StatesEnum.MoveState, new IsKeyPressedCondition("Move"));
         AddBehaviour(new AttackBehaviour(stateMachine));
+        AddBehaviour(new PlayIdleAnimation(stateMachine));
 
     }
 

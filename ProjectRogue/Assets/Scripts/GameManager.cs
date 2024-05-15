@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance {  get { return instance; } }
 
     [SerializeField] private GameObject player;
+    [SerializeField] private Transform playerSpawnPosition;
     public GameObject Player { get { return player; } }
     [SerializeField] private UIManager uiManager;
     public UIManager UIManager { get { return uiManager; } }
@@ -29,10 +30,6 @@ public class GameManager : MonoBehaviour
     }
     private void Initialize()
     {
-        if(player == null)
-        {
-            player = GameObject.Find("Player");
-        }
         foreach(var item in goToCreateOnSceneLoad)
         {
             var instantiatedItem = Instantiate(item);
@@ -44,6 +41,11 @@ public class GameManager : MonoBehaviour
                 player = instantiatedItem;
             }
         }
+        if(player == null)
+        {
+            player = GameObject.Find("Player");
+        }
+        player.transform.position = playerSpawnPosition.position;
     }
     public void GameOver()
     {

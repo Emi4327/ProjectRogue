@@ -7,31 +7,29 @@ public class PlayerMovementBehaviour : StateBehaviour
     private InputManager inputManager;
     private Rigidbody2D rb2D;
     private Statistics stats;
-
-    private bool canMove;
+    private PlayerHelper playerHelper;
     private Vector2 moveInput;
     public PlayerMovementBehaviour(StateMachine machine)
     {
         this.machine = machine;
-    }
-    public override void OnEnter()
-    {
+        playerHelper = machine.GetComponent<PlayerHelper>();
+        rb2D = machine.GetComponent<Rigidbody2D>();
+        stats = machine.GetComponent<Statistics>();
         inputManager = machine.GetComponent<InputManager>();
         inputManager.MoveAction.performed += ctx => DoOnMovePressed(ctx.ReadValue<Vector2>());
         inputManager.MoveAction.canceled += ctx => DoOnPressCancel();
-        rb2D = machine.GetComponent<Rigidbody2D>();
-        stats = machine.GetComponent<Statistics>();
+    }
+    public override void OnEnter()
+    {
+        inputManager.MoveAction.performed += ctx => DoOnMovePressed(ctx.ReadValue<Vector2>());
+        inputManager.MoveAction.canceled += ctx => DoOnPressCancel();
     }
     public override void OnFixedUpdate()
     {
-        if (canMove)
+        if (playerHelper.IsMoving)
         {
             Vector2 velocity = moveInput.normalized * stats.Speed;
             rb2D.velocity = velocity;
-        }
-        else
-        {
-            rb2D.velocity = Vector2.zero;
         }
     }
 
@@ -42,12 +40,12 @@ public class PlayerMovementBehaviour : StateBehaviour
     }
     private void DoOnMovePressed(Vector2 moveInput)
     {
-        canMove = true;
+        playerHelper.IsMoving = true;
         this.moveInput = moveInput;
     }
     private void DoOnPressCancel()
     {
-        canMove = false;
         rb2D.velocity = Vector2.zero;
+        playerHelper.IsMoving = false;
     }
 }

@@ -7,6 +7,6 @@ public class EnemyIdleState : State
 {
     public EnemyIdleState(StateMachine machine)
     {
-        this.machine = machine;
+
     }
 }

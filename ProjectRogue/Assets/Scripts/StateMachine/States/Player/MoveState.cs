@@ -5,11 +5,12 @@ using UnityEngine;
 
 public class MoveState : State
 {
-    public MoveState(StateMachine machine)
+    public MoveState(StateMachine stateMachine)
     {
-        transition = new Transition(machine);
+        transition = new Transition(stateMachine);
         AddTransitionCondition(StatesEnum.IdleState, new IsMoving(false));
-        AddBehaviour(new PlayerMovementBehaviour(machine));
-        AddBehaviour(new AttackBehaviour(machine));
+        AddBehaviour(new PlayerMovementBehaviour(stateMachine));
+        AddBehaviour(new AttackBehaviour(stateMachine));
+        AddBehaviour(new PlayMoveAnimation(stateMachine));
     }
 }

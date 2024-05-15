@@ -8,11 +8,13 @@ public class IsMoving : ITransitionCondition
 {
     private StateMachine machine;
     private Rigidbody2D rb2D;
-    private bool isTrue;
+    private PlayerHelper playerHelper;
+    private bool shouldBeTrue;
     private bool isInitialized;
-    public IsMoving(bool isTrue = true)
+    
+    public IsMoving(bool shouldBeTrue = true)
     {
-        this.isTrue = isTrue;
+        this.shouldBeTrue = shouldBeTrue;
     }
 
     public bool Condition(StateMachine machine)
@@ -22,33 +24,20 @@ public class IsMoving : ITransitionCondition
             Initialize(machine);
         }
 
-        if(Mathf.Approximately(rb2D.velocity.x, 0) && Mathf.Approximately(rb2D.velocity.y, 0))
+        if(shouldBeTrue)
         {
-            if(isTrue)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return playerHelper.IsMoving;
         }
         else
         {
-            if(isTrue)
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
+            return !playerHelper.IsMoving;
         }
     }
     private void Initialize(StateMachine machine)
     {
         isInitialized = true;
         rb2D = machine.GetComponent<Rigidbody2D>();
+        playerHelper = machine.GetComponent<PlayerHelper>();
     }
 
 }

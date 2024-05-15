@@ -15,6 +15,6 @@ public class EnemyStateMachine : StateMachine
     {
         states.Add(StatesEnum.EnemyIdleState, new EnemyIdleState(this));
         states.Add(StatesEnum.EnemyMoveToPlayerState, new EnemyMoveToPlayerState(this));
-        ChangeState(StatesEnum.EnemyMoveToPlayerState);
+        ChangeState(StatesEnum.EnemyIdleState);
     }
 }

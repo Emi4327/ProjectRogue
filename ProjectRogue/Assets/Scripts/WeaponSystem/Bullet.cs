@@ -32,7 +32,10 @@ public class Bullet : MonoBehaviour
 
     private void HandleCollision(RaycastHit2D hit)
     {
-        hit.collider.GetComponent<EnemyStatistics>().TakeDamage(damage);
+        if(hit.collider.GetComponent<EnemyStatistics>() != null)
+        {
+            hit.collider.GetComponent<EnemyStatistics>().TakeDamage(damage);
+        }
         Destroy(gameObject);
     }
 }

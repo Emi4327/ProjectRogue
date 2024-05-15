@@ -34,7 +34,6 @@ public class InputManager : MonoBehaviour
     }
     public Vector2 GetMousePosition()
     {
-
         return mousePosition.ReadValue<Vector2>();
     }
 }

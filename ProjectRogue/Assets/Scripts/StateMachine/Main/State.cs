@@ -6,7 +6,6 @@ namespace StateMachineNamespace
     public class State
     {
         protected Transition transition;
-        protected StateMachine machine;
         private List<StateBehaviour> behaviours = new List<StateBehaviour>();
         public void CheckTransition()
         {
